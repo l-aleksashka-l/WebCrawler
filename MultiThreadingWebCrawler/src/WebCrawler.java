@@ -5,6 +5,9 @@ import org.jsoup.nodes.Element;
 
 import javax.print.Doc;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class WebCrawler implements Runnable {
@@ -25,32 +28,35 @@ public class WebCrawler implements Runnable {
 
     @Override
     public void run() {
-        crawl(1,first_link);
+        crawl(1, first_link);
     }
 
-    private void crawl(int level, String url){
-        if(level <= MAX_DEPTH && counter < 10000){
-            Document document = request(url);
+    private void crawl(int level, String url) {
+        if (isUrlValid(url)) {
+            if (level <= MAX_DEPTH && counter < 10000) {
+                Document document = request(url, level);
 
-            if(document != null){
-                for(Element link : document.select("a[href]")){
-                    String next_link = link.absUrl("href");
-                    if(!visitedLinks.contains(next_link)){
-                        crawl(level++, next_link);
-
+                if (document != null) {
+                    for (Element link : document.select("a[href]")) {
+                        String next_link = link.absUrl("href");
+                        if (!visitedLinks.contains(next_link)) {
+                            crawl(level++, next_link);
+                            
+                        }
                     }
                 }
             }
         }
     }
 
-    private Document request(String url){
-        try{
+    private Document request(String url, int level) {
+        try {
             Connection connection = Jsoup.connect(url);
             Document document = connection.get();
 
-            if(connection.response().statusCode()==200){
+            if (connection.response().statusCode() == 200) {
                 System.out.println("\n" + counter + " **Bot ID: " + ID + " Recieved Webpage at " + url);
+                System.out.println("Level: " + level);
                 counter++;
                 String title = document.title();
                 System.out.println(title);
@@ -63,7 +69,19 @@ public class WebCrawler implements Runnable {
         }
     }
 
-    public Thread getThread(){
+    public static boolean isUrlValid(String url) {
+        try {
+            URL obj = new URL(url);
+            obj.toURI();
+            return true;
+        } catch (MalformedURLException e) {
+            return false;
+        } catch (URISyntaxException e) {
+            return false;
+        }
+    }
+
+    public Thread getThread() {
         return thread;
     }
 }
