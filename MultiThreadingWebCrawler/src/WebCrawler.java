@@ -74,9 +74,7 @@ public class WebCrawler implements Runnable {
             URL obj = new URL(url);
             obj.toURI();
             return true;
-        } catch (MalformedURLException e) {
-            return false;
-        } catch (URISyntaxException e) {
+        } catch (MalformedURLException | URISyntaxException e) {
             return false;
         }
     }
