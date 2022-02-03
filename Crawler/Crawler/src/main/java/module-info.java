@@ -10,6 +10,8 @@ module com.project.crawler {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires org.jsoup;
+    requires java.desktop;
 
     opens com.project.crawler to javafx.fxml;
     exports com.project.crawler;
