@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="doc">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../Intelligy Idea/javacsv2.1.zip!/doc" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../Intelligy Idea/javacsv2.1.zip!/src" />
+    </SOURCES>
+  </library>
+</component>

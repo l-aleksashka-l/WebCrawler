@@ -31,9 +31,12 @@ public class ConnectionClass {
             int a = (int) (Math.random()*10000);
             System.out.println("Create table");
             SqlRequests.CreateDb(a, strings,statement); //Create table
+            List<String> links = new ArrayList<>();
+            links.add(urlSite);
+
 
             WebCrawler w = new WebCrawler(dep,bread,urlSite, strings,statement);
-            WebCrawler.crawl(a,1,urlSite, strings,statement);
+            WebCrawler.crawl(a,0,links, strings, statement);
 
             if(t&&f){ SqlRequests.writeToCSVtop(a, statement);SqlRequests.writeToCSVFull(a,statement);}
             else if(f) SqlRequests.writeToCSVFull(a,statement);

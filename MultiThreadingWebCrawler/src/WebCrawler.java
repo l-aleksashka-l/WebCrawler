@@ -35,7 +35,6 @@ public class WebCrawler implements Runnable {
         if (isUrlValid(url)) {
             if (level <= MAX_DEPTH && counter < 10000) {
                 Document document = request(url, level);
-
                 if (document != null) {
                     for (Element link : document.select("a[href]")) {
                         String next_link = link.absUrl("href");

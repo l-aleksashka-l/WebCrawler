@@ -24,7 +24,7 @@ public class SqlRequests {
         statement.executeUpdate(sql);
     }
 
-    public static void writeToCSVtop(int sult,Statement statement) throws SQLException {
+        public static void writeToCSVtop(int sult,Statement statement) throws SQLException {
         String sql = "CALL CSVWRITE('D:/Download/Projects/WebCrawler/Crawler/Crawler/target/test/top.csv', 'SELECT * FROM CRAWLER"+sult+" ORDER BY total DESC LIMIT 10')";
         statement.executeUpdate(sql);
     }
